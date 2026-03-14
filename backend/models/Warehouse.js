@@ -7,4 +7,4 @@ const warehouseSchema = new mongoose.Schema({
   manager: String
 });
 
-module.exports = mongoose.model("Warehouse", warehouseSchema);
+module.exports = mongoose.model("Warehouse", warehouseSchema);  

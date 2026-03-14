@@ -360,6 +360,36 @@ function initSidebar(page) {
   if (sidebarToggleMobile) {
     sidebarToggleMobile.addEventListener('click', toggleSidebar);
   }
+
+  // Add logout menu under the sidebar logo
+  const logo = sidebar.querySelector('.sidebar-logo');
+  const header = sidebar.querySelector('.sidebar-header');
+
+  if (logo && header) {
+    const existingMenu = header.querySelector('.logo-menu');
+    if (!existingMenu) {
+      const menu = document.createElement('div');
+      menu.className = 'logo-menu';
+      menu.innerHTML = `
+        <div class="logo-menu-item" data-logout>
+          <span>Logout</span>
+          <span class="menu-icon">🚪</span>
+        </div>
+      `;
+      header.appendChild(menu);
+
+      logo.addEventListener('click', (event) => {
+        event.stopPropagation();
+        menu.classList.toggle('show');
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!menu.contains(event.target) && event.target !== logo) {
+          menu.classList.remove('show');
+        }
+      });
+    }
+  }
 }
 
 // Header Management
@@ -394,12 +424,27 @@ function saveSuppliers(suppliers) {
   setStorage('suppliers', suppliers);
 }
 
-function getCustomers() {
-  return getStorage('customers', []);
+async function getCustomers() {
+  try {
+    const response = await fetch('http://localhost:5000/api/customer');
+    if (!response.ok) throw new Error('Failed to fetch customers');
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching customers:', error);
+    return getStorage('customers', []); // fallback to localStorage
+  }
 }
 
-function saveCustomers(customers) {
-  setStorage('customers', customers);
+async function saveCustomers(customers) {
+  try {
+    // For simplicity, assuming we save all, but in reality, need to handle CRUD
+    // This is a basic implementation; in production, handle individual operations
+    setStorage('customers', customers); // temporary
+    // await fetch('http://localhost:5000/api/customer', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(customers) });
+  } catch (error) {
+    console.error('Error saving customers:', error);
+    setStorage('customers', customers); // fallback
+  }
 }
 
 function getPurchases() {
@@ -1852,3 +1897,14 @@ function initPage() {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', initPage);
+
+fetch("http://localhost:5000/api/warehouse/add", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: "Main Warehouse",
+    location: "Ahmedabad",
+    capacity: 500,
+    manager: "Admin"
+  })
+});

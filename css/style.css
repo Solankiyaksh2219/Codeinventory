@@ -34,6 +34,9 @@
   --gradient-success: linear-gradient(135deg, #22c55e 0%, #06b6d4 100%);
   --glass-bg: rgba(255, 255, 255, 0.06);
   --glass-border: rgba(255, 255, 255, 0.12);
+  --highlight: rgba(34, 211, 238, 0.35);
+  --highlight-strong: rgba(34, 211, 238, 0.7);
+  --focus-ring: 0 0 0 3px rgba(34, 211, 238, 0.33);
 }
 
 * {
@@ -150,12 +153,50 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.sidebar ul {
-  list-style: none;
-  position: relative;
-}
+  .logo-menu {
+    position: absolute;
+    top: 68px;
+    right: 18px;
+    width: 190px;
+    background: rgba(6, 10, 23, 0.9);
+    border: 1px solid rgba(34, 211, 238, 0.35);
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
+    padding: 10px 0;
+    backdrop-filter: blur(18px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    z-index: 1100;
+  }
 
-.sidebar ul li {
+  .logo-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .logo-menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .logo-menu-item:hover {
+    background: rgba(34, 211, 238, 0.16);
+    transform: translateY(-1px);
+  }
+
+  .logo-menu-item .menu-icon {
+    font-size: 18px;
+  }
+
   margin-bottom: 8px;
   position: relative;
 }
@@ -196,11 +237,12 @@ body {
 }
 
 .sidebar ul li a.active {
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: rgba(34, 211, 238, 0.18);
+  box-shadow: 0 10px 24px rgba(34, 211, 238, 0.18);
   pointer-events: none;
   cursor: default;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  color: rgba(255, 255, 255, 0.96);
 }
 
 .sidebar ul li a.active::after {
@@ -209,11 +251,23 @@ body {
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
   background: var(--accent-color);
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(34, 211, 238, 0.8);
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.9);
+}
+
+.sidebar ul li a.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, rgba(34, 211, 238, 0.9), rgba(124, 58, 237, 0.8));
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .nav-icon {
@@ -540,10 +594,19 @@ main {
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: rgba(34, 211, 238, 0.6);
-  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.15), 0 8px 24px rgba(0, 0, 0, 0.5);
+  border-color: rgba(34, 211, 238, 0.9);
+  box-shadow: var(--focus-ring), 0 10px 26px rgba(0, 0, 0, 0.45);
   transform: translateY(-1px);
 }
+
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.form-group textarea:focus-visible {
+  outline: none;
+  border-color: rgba(34, 211, 238, 1);
+  box-shadow: var(--focus-ring), 0 10px 26px rgba(0, 0, 0, 0.45);
+}
+
 
 .form-group textarea {
   resize: vertical;
@@ -590,6 +653,21 @@ main {
 
 .btn:hover::before {
   left: 100%;
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45), 0 0 0 3px rgba(34, 211, 238, 0.15);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring), 0 16px 32px rgba(0, 0, 0, 0.45);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
 }
 
 .btn-primary {
@@ -702,9 +780,20 @@ table tbody tr:hover::before {
 }
 
 table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.09);
   transform: scale(1.01);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+table tbody tr.selected {
+  background: rgba(34, 211, 238, 0.12);
+  box-shadow: 0 10px 28px rgba(34, 211, 238, 0.25);
+  border-left: 4px solid rgba(34, 211, 238, 0.8);
+}
+
+table tbody tr.selected::before {
+  width: 4px;
+  background: rgba(34, 211, 238, 0.9);
 }
 
 .status-badge {

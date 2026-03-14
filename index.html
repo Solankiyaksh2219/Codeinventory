@@ -4,9 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inventory Management System</title>
-  <meta http-equiv="refresh" content="0; url=login.html" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  Redirecting to <a href="login.html">login</a>...
+  <h1>Inventory Management</h1>
+
+  <!-- OTP Section -->
+  <section id="otpSection">
+    <h2>Phone OTP Login</h2>
+    <input type="text" id="phone" placeholder="Enter phone number" />
+    <button id="sendOtp">Send OTP</button><br><br>
+
+    <input type="text" id="otp" placeholder="Enter OTP" />
+    <button id="verifyOtp">Verify OTP</button>
+  </section>
+
+  <hr />
+
+  <!-- Product List Section -->
+  <section id="productSection">
+    <h2>Products</h2>
+    <div id="productList">Loading products...</div>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 </html>
