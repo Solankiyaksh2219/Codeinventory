@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - Inventory Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="categories">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-btn" id="sidebarToggle">☰</button>
+            <div class="sidebar-logo">IMS</div>
+        </div>
+        <ul>
+            <li><a href="dashboard.html" data-page="dashboard"><span class="nav-icon">📊</span><span class="nav-text">Dashboard</span></a></li>
+            <li><a href="products.html" data-page="products"><span class="nav-icon">📦</span><span class="nav-text">Products</span></a></li>
+            <li><a href="categories.html" data-page="categories" class="active"><span class="nav-icon">🏷️</span><span class="nav-text">Categories</span></a></li>
+            <li><a href="suppliers.html" data-page="suppliers"><span class="nav-icon">🚚</span><span class="nav-text">Suppliers</span></a></li>
+            <li><a href="customers.html" data-page="customers"><span class="nav-icon">👥</span><span class="nav-text">Customers</span></a></li>
+            <li><a href="purchase.html" data-page="purchase"><span class="nav-icon">🛒</span><span class="nav-text">Purchase Orders</span></a></li>
+            <li><a href="sales.html" data-page="sales"><span class="nav-icon">💰</span><span class="nav-text">Sales Orders</span></a></li>
+            <li><a href="warehouse.html" data-page="warehouse"><span class="nav-icon">🏭</span><span class="nav-text">Warehouse</span></a></li>
+            <li><a href="operations.html" data-page="operations"><span class="nav-icon">⚙️</span><span class="nav-text">Operations</span></a></li>
+            <li><a href="stock.html" data-page="stock"><span class="nav-icon">📈</span><span class="nav-text">Stock</span></a></li>
+            <li><a href="history.html" data-page="history"><span class="nav-icon">📜</span><span class="nav-text">History</span></a></li>
+            <li><a href="settings.html" data-page="settings"><span class="nav-icon">🔧</span><span class="nav-text">Settings</span></a></li>
+        </ul>
+    </aside>
+
+    <div class="main-content">
+        <header>
+            <div class="header-left">
+                <button class="toggle-btn" id="sidebarToggleMobile">☰</button>
+                <h1 class="page-title">Categories</h1>
+            </div>
+            <div class="header-right">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search categories...">
+                </div>
+                <div class="profile-icon">A</div>
+            </div>
+        </header>
+
+        <main>
+            <div class="section">
+                <div class="section-header">
+                    <h2>Add New Category</h2>
+                </div>
+                <div class="section-content">
+                    <form id="categoryForm" class="form-grid">
+                        <div class="form-group">
+                            <label for="categoryName">Category Name</label>
+                            <input type="text" id="categoryName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryDescription">Description</label>
+                            <textarea id="categoryDescription" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryProducts">Products in Category</label>
+                            <select id="categoryProducts" multiple size="5"></select>
+                            <small class="text-muted">Select products to associate with this category (Ctrl+Click to select multiple)</small>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Add Category</button>
+                            <button type="button" id="cancelEdit" class="btn btn-secondary" style="display: none;">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2>Categories List</h2>
+                </div>
+                <div class="section-content">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                    <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Products</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="categoryTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

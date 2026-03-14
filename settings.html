@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Inventory Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="settings">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-btn" id="sidebarToggle">☰</button>
+            <div class="sidebar-logo">IMS</div>
+        </div>
+        <ul>
+            <li><a href="dashboard.html" data-page="dashboard"><span class="nav-icon">📊</span><span class="nav-text">Dashboard</span></a></li>
+            <li><a href="products.html" data-page="products"><span class="nav-icon">📦</span><span class="nav-text">Products</span></a></li>
+            <li><a href="categories.html" data-page="categories"><span class="nav-icon">🏷️</span><span class="nav-text">Categories</span></a></li>
+            <li><a href="suppliers.html" data-page="suppliers"><span class="nav-icon">🚚</span><span class="nav-text">Suppliers</span></a></li>
+            <li><a href="customers.html" data-page="customers"><span class="nav-icon">👥</span><span class="nav-text">Customers</span></a></li>
+            <li><a href="purchase.html" data-page="purchase"><span class="nav-icon">🛒</span><span class="nav-text">Purchase Orders</span></a></li>
+            <li><a href="sales.html" data-page="sales"><span class="nav-icon">💰</span><span class="nav-text">Sales Orders</span></a></li>
+            <li><a href="warehouse.html" data-page="warehouse"><span class="nav-icon">🏭</span><span class="nav-text">Warehouse</span></a></li>
+            <li><a href="operations.html" data-page="operations"><span class="nav-icon">⚙️</span><span class="nav-text">Operations</span></a></li>
+            <li><a href="stock.html" data-page="stock"><span class="nav-icon">📈</span><span class="nav-text">Stock</span></a></li>
+            <li><a href="history.html" data-page="history"><span class="nav-icon">📜</span><span class="nav-text">History</span></a></li>
+            <li><a href="settings.html" data-page="settings" class="active"><span class="nav-icon">🔧</span><span class="nav-text">Settings</span></a></li>
+        </ul>
+    </aside>
+
+    <div class="main-content">
+        <header>
+            <div class="header-left">
+                <button class="toggle-btn" id="sidebarToggleMobile">☰</button>
+                <h1 class="page-title">Settings</h1>
+            </div>
+            <div class="header-right">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search settings...">
+                </div>
+                <div class="profile-icon">A</div>
+            </div>
+        </header>
+
+        <main>
+            <div class="section">
+                <div class="section-header">
+                    <h2>System Settings</h2>
+                </div>
+                <div class="section-content">
+                    <form id="settingsForm" class="form-grid">
+                        <div class="form-group">
+                            <label for="companyName">Company Name</label>
+                            <input type="text" id="companyName" value="Your Company">
+                        </div>
+                        <div class="form-group">
+                            <label for="lowStockThreshold">Low Stock Alert Threshold</label>
+                            <input type="number" id="lowStockThreshold" min="0" value="10">
+                        </div>
+                        <div class="form-group">
+                            <label for="currency">Currency Symbol</label>
+                            <select id="currency">
+                                <option value="₹">₹ (INR)</option>
+                                <option value="$">$ (USD)</option>
+                                <option value="€">€ (EUR)</option>
+                                <option value="£">£ (GBP)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateFormat">Date Format</label>
+                            <select id="dateFormat">
+                                <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                                <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                                <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Save Settings</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2>User Preferences</h2>
+                </div>
+                <div class="section-content">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="theme">Theme</label>
+                            <select id="theme">
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                                <option value="auto">Auto</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="language">Language</label>
+                            <select id="language">
+                                <option value="en">English</option>
+                                <option value="hi">Hindi</option>
+                                <option value="es">Spanish</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemsPerPage">Items Per Page</label>
+                            <select id="itemsPerPage">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="emailNotifications" checked>
+                                Email Notifications
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="autoSave" checked>
+                                Auto-save Forms
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="showTooltips">
+                                Show Tooltips
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">
+                    <h2>Data Management</h2>
+                </div>
+                <div class="section-content">
+                    <div class="action-buttons">
+                        <button class="btn btn-warning" id="exportData">Export Data</button>
+                        <button class="btn btn-danger" id="clearData">Clear All Data</button>
+                        <button class="btn btn-secondary" id="backupData">Create Backup</button>
+                    </div>
+                    <div class="alert alert-info">
+                        <strong>Note:</strong> Clearing data will permanently remove all inventory data. Make sure to create a backup first.
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

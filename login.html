@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Inventory Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg-main:#020617;
+  --bg-secondary:#0f172a;
+  --card-bg:rgba(15,23,42,0.75);
+  --primary:#7c5cff;
+  --secondary:#22d3ee;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at top left, rgba(124,92,255,.25), transparent 40%),
+    radial-gradient(circle at bottom right, rgba(34,211,238,.25), transparent 40%),
+    linear-gradient(135deg,#1e1b4b,var(--bg-main));
+  color:var(--text);
+  overflow:hidden;
+}
+
+/* Glow effects */
+.glow{
+  position:absolute;
+  width:200px;
+  height:200px;
+  background:var(--primary);
+  filter:blur(130px);
+  opacity:.35;
+  top:10%;
+  left:15%;
+}
+.glow.two{
+  background:var(--secondary);
+  top:70%;
+  left:70%;
+}
+
+/* Login Card */
+.login-box{
+  width:390px;
+  background:var(--card-bg);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  padding:32px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  z-index:1;
+  animation:fadeIn .7s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+h1{
+  text-align:center;
+  font-size:24px;
+  margin-bottom:6px;
+  background:linear-gradient(135deg,#a5b4fc,#67e8f9);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.subtitle{
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:26px;
+}
+
+label{
+  font-size:12px;
+  color:var(--muted);
+}
+
+input{
+  width:100%;
+  padding:13px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.1);
+  background:#020617;
+  color:var(--text);
+  margin:6px 0 16px;
+  transition:.3s;
+}
+
+input:focus{
+  outline:none;
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(124,92,255,.25);
+}
+
+/* Buttons */
+button{
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:14px;
+  font-weight:500;
+  cursor:pointer;
+  transition:.35s;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary),#5b3df5);
+  color:white;
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 15px 35px rgba(124,92,255,.55);
+}
+
+/* Divider */
+.divider{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:22px 0;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.divider::before,
+.divider::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:rgba(255,255,255,.1);
+}
+
+/* Social buttons */
+.social{
+  display:flex;
+  gap:12px;
+}
+
+.social button{
+  flex:1;
+  background:#020617;
+  color:white;
+  border:1px solid rgba(255,255,255,.1);
+}
+
+.social button:hover{
+  border-color:var(--secondary);
+  box-shadow:0 10px 25px rgba(34,211,238,.4);
+}
+
+/* Phone auth */
+.phone-box{
+  display:none;
+  margin-top:15px;
+}
+
+/* Footer */
+.footer{
+  margin-top:18px;
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.footer span{
+  color:var(--primary);
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="glow"></div>
+<div class="glow two"></div>
+
+<div class="login-box">
+  <h1>Inventory System</h1>
+  <p class="subtitle">Smart & secure inventory management</p>
+
+  <form id="loginForm">
+    <label for="loginEmail">Email Address</label>
+    <input type="email" id="loginEmail" placeholder="example@email.com" required>
+
+    <label for="loginPassword">Password</label>
+    <input type="password" id="loginPassword" placeholder="••••••••" required>
+
+    <div id="loginError" class="error-message" aria-live="polite" style="color:#fb7185; font-size:12px; min-height:18px; margin-bottom:12px;"></div>
+
+    <button type="submit" class="btn-primary" id="signInBtn">Sign In</button>
+    <button type="button" class="btn-secondary" id="signUpBtn" style="margin-top:10px;">Create Account</button>
+  </form>
+
+  <div class="divider">OR CONTINUE WITH</div>
+
+  <div class="social">
+    <button type="button" id="googleBtn">Google</button>
+    <button type="button" id="phoneToggleBtn">Phone</button>
+  </div>
+
+  <div class="phone-box" id="phoneBox">
+    <label for="phoneNumber">Phone Number</label>
+    <input type="tel" id="phoneNumber" placeholder="+91 98765 43210">
+    <button class="btn-primary" id="sendOtpBtn">Send OTP</button>
+  </div>
+
+  <div class="footer">
+    Don’t have an account? <span id="signupLink" style="color:var(--secondary);">Sign Up</span>
+  </div>
+</div>
+
+<script>
+  function showPhone() {
+    const box = document.getElementById('phoneBox');
+    box.style.display = box.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function setLoggedIn() {
+    localStorage.setItem('loggedIn', 'true');
+  }
+
+  function redirectToDashboard() {
+    setLoggedIn();
+    window.location.href = 'dashboard.html';
+  }
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    const loginEmail = document.getElementById('loginEmail');
+    const loginPassword = document.getElementById('loginPassword');
+    const loginError = document.getElementById('loginError');
+    const signUpBtn = document.getElementById('signUpBtn');
+    const signupLink = document.getElementById('signupLink');
+    const googleBtn = document.getElementById('googleBtn');
+    const phoneToggleBtn = document.getElementById('phoneToggleBtn');
+    const sendOtpBtn = document.getElementById('sendOtpBtn');
+
+    function showError(message) {
+      loginError.textContent = message;
+    }
+
+    loginForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const email = loginEmail.value.trim();
+      const password = loginPassword.value;
+
+      if (!email || !password) {
+        showError('Please enter both email and password.');
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        showError('Please enter a valid email address.');
+        return;
+      }
+
+      if (password.length < 6) {
+        showError('Password must be at least 6 characters.');
+        return;
+      }
+
+      showError('');
+      redirectToDashboard();
+    });
+
+    function goToDashboard() {
+      showError('');
+      redirectToDashboard();
+    }
+
+    signUpBtn.addEventListener('click', goToDashboard);
+    signupLink.addEventListener('click', goToDashboard);
+    googleBtn.addEventListener('click', goToDashboard);
+
+    phoneToggleBtn.addEventListener('click', () => {
+      showPhone();
+    });
+
+    sendOtpBtn.addEventListener('click', () => {
+      const phoneNumber = document.getElementById('phoneNumber').value.trim();
+      if (!phoneNumber) {
+        showError('Please enter a phone number.');
+        return;
+      }
+      showError('OTP sent! (simulated)');
+      setTimeout(() => {
+        redirectToDashboard();
+      }, 1100);
+    });
+  });
+</script>
+
+</body>
+</html>
